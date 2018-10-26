@@ -2,7 +2,12 @@
 
 require_once('includes/db.php');
 require_once('includes/header.php');
-
+$query = "SELECT * FROM menu";
+$result = mysqli_query($connection, $query);
+if (!$result) {
+    die("query is wrong");
+}
+while ($row = mysqli_fetch_array($result))
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -35,15 +40,11 @@ require_once('includes/header.php');
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-              <a class="nav-link" href="about.html">About</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="services.html">Services</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="contact.html">Contact</a>
-            </li>
+            <li>
+              <a href="<?php echo $row["link"]; ?>">
+                  <?php echo $row["name"] ?>
+                </a>
+              </li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPortfolio" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Portfolio
